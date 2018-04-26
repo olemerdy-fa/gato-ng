@@ -20,7 +20,7 @@ export class StuffListComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       dom: 'Brftip',
-      buttons: ['copy', 'print', 'csv']
+      buttons: ['copy', 'print', 'csv', 'excel', 'pdf']
     };
 
     this.http.get(`${environment.apiEndpoint}stuff`)
