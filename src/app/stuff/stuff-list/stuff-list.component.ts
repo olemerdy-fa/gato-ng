@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class StuffListComponent implements OnInit {
 
-  dtOptions: DataTables.Settings = {};
+  dtOptions: any = {};
   dtTrigger: Subject<any> = new Subject();
 
   values: any[] = [];
@@ -18,6 +18,11 @@ export class StuffListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dtOptions = {
+      dom: 'Brftip',
+      buttons: ['copy', 'print', 'excel']
+    };
+
     this.http.get(`${environment.apiEndpoint}stuff`)
       .subscribe(res => {
         this.values = res as any[];

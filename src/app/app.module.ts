@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    CoreModule.forRoot(),
     DataTablesModule.forRoot(),
     HttpClientModule,
     RouterModule.forRoot(routes)
