@@ -1,3 +1,16 @@
-<p>
-  stuff-list works!
-</p>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Creation Date</th>
+    <th>Title</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let stuff of values">
+    <td>{{ stuff.id }}</td>
+    <td>{{ stuff.creationDate }}</td>
+    <td>{{ stuff.title }}</td>
+  </tr>
+  </tbody>
+</table>

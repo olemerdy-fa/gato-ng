@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { environment } from '../../../environments/environment';
 
 @Component({
   templateUrl: './stuff-list.component.html',
@@ -6,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StuffListComponent implements OnInit {
 
-  constructor() {
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
+  values: any[] = [];
+
+  constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
+    this.http.get(`${environment.apiEndpoint}stuff`)
+      .subscribe(res => {
+        this.values = res as any[];
+        this.dtTrigger.next();
+      });
   }
 
 }
