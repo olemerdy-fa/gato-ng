@@ -10,7 +10,7 @@
   <tr *ngFor="let stuff of values">
     <td>{{ stuff.id }}</td>
     <td>{{ stuff.title }}</td>
-    <td>{{ stuff.creationDate }}</td>
+    <td>{{ stuff.creationDate | moment }}</td>
   </tr>
   </tbody>
 </table>
