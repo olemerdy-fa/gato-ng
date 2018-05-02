@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { AuthRoutingModule } from './auth-routing.module';
+import { AuthService } from './auth.service';
 import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
@@ -14,4 +15,12 @@ import { CallbackComponent } from './callback/callback.component';
   ]
 })
 export class AuthModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: AuthModule,
+      providers: [
+        AuthService
+      ]
+    };
+  }
 }

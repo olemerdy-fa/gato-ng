@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 import { CoreModule } from './core/core.module';
 
@@ -15,13 +16,13 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'auth',
-    loadChildren: 'app/auth/auth.module#AuthModule'
-  },
-  {
     path: 'stuff',
     loadChildren: 'app/stuff/stuff.module#StuffModule'
   },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
@@ -29,6 +30,7 @@ const routes: Routes = [
     AppComponent
   ],
   imports: [
+    AuthModule.forRoot(),
     BrowserModule,
     CoreModule.forRoot(),
     DataTablesModule.forRoot(),

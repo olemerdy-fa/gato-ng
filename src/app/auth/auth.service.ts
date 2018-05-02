@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { environment } from '../../environments/environment';
 
@@ -12,24 +13,24 @@ export class AuthService {
     responseType: 'token id_token',
     audience: 'https://gato-api.herokuapp.com/',
     redirectUri: environment.authCallbackUrl,
-    scope: 'openid profile'
+    scope: 'openid'
   });
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, @Inject(DOCUMENT) private document: any) {
   }
 
-  public login(): void {
+  login(): void {
     this.auth0.authorize();
   }
 
-  public handleAuthentication(): void {
+  handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
+        this.document.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/'], {relativeTo: this.route.parent});
+        this.router.navigate(['/']);
       } else if (err) {
-        this.router.navigate(['/'], {relativeTo: this.route.parent});
+        this.router.navigate(['/']);
         console.log(err);
       }
     });
@@ -43,7 +44,7 @@ export class AuthService {
     localStorage.setItem('expires_at', expiresAt);
   }
 
-  public logout(): void {
+  logout(): void {
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
@@ -52,7 +53,7 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  public isAuthenticated(): boolean {
+  isAuthenticated(): boolean {
     // Check whether the current time is past the
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));

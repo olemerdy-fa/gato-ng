@@ -4,8 +4,13 @@ import { CallbackComponent } from './callback/callback.component';
 
 const routes: Routes = [
   {
-    path: 'callback',
-    component: CallbackComponent
+    path: 'auth',
+    children: [
+      {
+        path: 'callback',
+        component: CallbackComponent
+      }
+    ]
   }
 ];
 
