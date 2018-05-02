@@ -5,11 +5,6 @@
 
 export const environment = {
   apiEndpoint: 'https://gato-api.herokuapp.com/',
-  loginUrl: 'https://olemerdy-fa.eu.auth0.com/authorize' +
-  '?audience=https://gato-api.herokuapp.com/' +
-  '&scope=profile' +
-  '&response_type=token' +
-  '&client_id=pzwuSOVtcMkwW6vom2uKiLmxxk6d1hdx' +
-  '&redirect_uri=http://localhost:4200/auth/callback',
+  authCallbackUrl: 'http://localhost:4200/auth/callback',
   production: false
 };

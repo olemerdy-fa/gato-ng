@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { environment } from '../environments/environment';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent {
 
-  loginUrl = environment.loginUrl;
-
+  constructor(public auth: AuthService) {
+    this.auth.handleAuthentication();
+  }
 }

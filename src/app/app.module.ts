@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
+import { AuthService } from './auth/auth.service';
 import { CoreModule } from './core/core.module';
 
 const routes: Routes = [
@@ -34,7 +35,9 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
