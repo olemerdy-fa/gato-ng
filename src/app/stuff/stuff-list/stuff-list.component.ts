@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -9,24 +8,15 @@ import { environment } from '../../../environments/environment';
 })
 export class StuffListComponent implements OnInit {
 
-  dtOptions: any = {};
-  dtTrigger: Subject<any> = new Subject();
-
   values: any[] = [];
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.dtOptions = {
-      dom: 'Brftip',
-      buttons: ['copy', 'print', 'csv', 'excel', 'pdf']
-    };
-
     this.http.get(`${environment.apiEndpoint}stuff`)
       .subscribe(res => {
         this.values = res as any[];
-        this.dtTrigger.next();
       });
   }
 

@@ -2,7 +2,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { DataTablesModule } from 'angular-datatables';
 
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
@@ -17,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'stuff',
-    loadChildren: 'app/stuff/stuff.module#StuffModule'
+    loadChildren: './stuff/stuff.module#StuffModule'
   },
   {
     path: '**',
@@ -33,7 +32,6 @@ const routes: Routes = [
     AuthModule.forRoot(),
     BrowserModule,
     CoreModule.forRoot(),
-    DataTablesModule.forRoot(),
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
