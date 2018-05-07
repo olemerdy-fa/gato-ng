@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatButtonModule, MatToolbarModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -29,11 +31,14 @@ const routes: Routes = [
     AppComponent
   ],
   imports: [
-    AuthModule.forRoot(),
     BrowserModule,
+    BrowserAnimationsModule,
     CoreModule.forRoot(),
+    RouterModule.forRoot(routes),
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    AuthModule.forRoot(),
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [
     AuthService

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -8,16 +9,15 @@ import { environment } from '../../../environments/environment';
 })
 export class StuffListComponent implements OnInit {
 
-  values: any[] = [];
+  columns = ['id', 'title', 'creationDate'];
+
+  values: Observable<any[]>;
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.http.get(`${environment.apiEndpoint}stuff`)
-      .subscribe(res => {
-        this.values = res as any[];
-      });
+    this.values = this.http.get<any[]>(`${environment.apiEndpoint}stuff`);
   }
 
 }
