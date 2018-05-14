@@ -60,4 +60,8 @@ export class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
+  get access_token(): string | null {
+    return localStorage.getItem('access_token');
+  }
+
 }
