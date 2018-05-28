@@ -1,13 +1,13 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatToolbarModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
-import { AuthService } from './auth/auth.service';
 import { CoreModule } from './core/core.module';
 
 const routes: Routes = [
@@ -33,16 +33,13 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    CoreModule.forRoot(),
-    RouterModule.forRoot(routes),
     HttpClientModule,
+    RouterModule.forRoot(routes),
     AuthModule.forRoot(),
-    MatToolbarModule,
-    MatButtonModule
+    CoreModule.forRoot(),
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
   ],
-  providers: [
-    AuthService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

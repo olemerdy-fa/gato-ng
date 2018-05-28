@@ -1,21 +1,5 @@
-<mat-toolbar>
-  <h1>GATO</h1>
-  <span style="flex: 1 1 auto;"></span>
-  <a mat-button routerLink="/stuff" routerLinkActive="active">Stuff</a>
-  <a mat-button routerLink="/user" routerLinkActive="active">User</a>
-  <button
-    mat-button
-    class="btn btn-primary btn-margin"
-    *ngIf="!auth.isAuthenticated()"
-    (click)="auth.login()">
-    Log In
-  </button>
-  <button
-    mat-button
-    class="btn btn-primary btn-margin"
-    *ngIf="auth.isAuthenticated()"
-    (click)="auth.logout()">
-    Log Out
-  </button>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<app-main-nav>
+  <router-outlet></router-outlet>
+</app-main-nav>
+
+
