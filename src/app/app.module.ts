@@ -37,7 +37,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {enableTracing: !(environment.production)}),
     AuthModule.forRoot(),
     CoreModule.forRoot(),
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('./ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [],
   bootstrap: [AppComponent]
