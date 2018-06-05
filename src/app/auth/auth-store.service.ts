@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root',
-  useValue: new AuthStore(localStorage)
+  providedIn: 'root'
 })
 export class AuthStore {
 
-  constructor(private backend) {
+  private backend = localStorage;
+
+  constructor() {
   }
 
   get accessToken(): string | null {
