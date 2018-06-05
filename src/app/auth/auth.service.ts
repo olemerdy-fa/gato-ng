@@ -1,8 +1,8 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { environment } from '../../environments/environment';
+import { AuthStore } from './auth-store.service';
 
 @Injectable()
 export class AuthService {
@@ -16,18 +16,17 @@ export class AuthService {
     scope: 'openid'
   });
 
-  constructor(private router: Router, @Inject(DOCUMENT) private document: any) {
-  }
-
-  login(): void {
-    this.auth0.authorize();
+  constructor(private router: Router, private store: AuthStore) {
   }
 
   handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.document.location.hash = '';
-        this.setSession(authResult);
+        this.store.store({
+          accessToken: authResult.accessToken,
+          idToken: authResult.idToken,
+          expiresAt: authResult.expiresIn * 1000 + new Date().getTime()
+        });
         this.router.navigate(['/']);
       } else if (err) {
         this.router.navigate(['/']);
@@ -36,32 +35,23 @@ export class AuthService {
     });
   }
 
-  private setSession(authResult): void {
-    // Set the time that the Access Token will expire at
-    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
+  isAuthenticated(): boolean {
+    return new Date().getTime() < this.store.expiresAt;
+  }
+
+  login(): void {
+    this.auth0.authorize();
   }
 
   logout(): void {
     // Remove tokens and expiry time from localStorage
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
+    this.store.clear();
     // Go back to the home route
     this.router.navigate(['/']);
   }
 
-  isAuthenticated(): boolean {
-    // Check whether the current time is past the
-    // Access Token's expiry time
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
-  }
-
   get access_token(): string | null {
-    return localStorage.getItem('access_token');
+    return this.store.accessToken;
   }
 
 }

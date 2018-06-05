@@ -34,7 +34,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {enableTracing: !(environment.production)}),
     AuthModule.forRoot(),
     CoreModule.forRoot(),
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
