@@ -29,7 +29,7 @@ export class ConfigService {
 
   constructor(private http: HttpClient) {
     this.data = this.http
-      .get<Config>(`/config/${environment.configFile}`)
+      .get<Config>(`./config/${environment.configFile}`)
       .pipe(
         map(config => Object.assign({}, baseConfig, config)),
         shareReplay(1)
