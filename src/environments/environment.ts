@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  apiEndpoint: 'https://gato-api.herokuapp.com/',
+  // apiEndpoint: 'https://gato-api.herokuapp.com/',
+  apiEndpoint: 'http://localhost:8080/',
   authCallbackUrl: 'http://localhost:4200/auth/callback',
   production: false
 };

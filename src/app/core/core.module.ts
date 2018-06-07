@@ -12,6 +12,7 @@ import {
   MatTableModule,
   MatToolbarModule
 } from '@angular/material';
+import { RouterModule } from '@angular/router';
 import { CredentialsInterceptor } from './credentials-interceptor.service';
 import { MainNavComponent } from './main-nav/main-nav.component';
 
@@ -27,6 +28,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    RouterModule
   ],
   exports: [
     MainNavComponent
