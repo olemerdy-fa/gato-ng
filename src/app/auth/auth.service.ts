@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
-import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { ConfigService } from '../core/config.service';
 import { AuthStore } from './auth-store.service';
 
 @Injectable({
@@ -9,20 +11,25 @@ import { AuthStore } from './auth-store.service';
 })
 export class AuthService {
 
-  auth0 = new auth0.WebAuth({
-    clientID: 'pzwuSOVtcMkwW6vom2uKiLmxxk6d1hdx',
-    domain: 'olemerdy-fa.eu.auth0.com',
-    responseType: 'token id_token',
-    audience: 'https://gato-api.herokuapp.com/',
-    redirectUri: environment.authCallbackUrl,
-    scope: 'openid'
-  });
+  auth0: Observable<auth0.WebAuth>;
 
-  constructor(private router: Router, private store: AuthStore) {
+  constructor(private config: ConfigService, private router: Router, private store: AuthStore) {
+    this.auth0 = this.config.data.pipe(
+      map(props =>
+        new auth0.WebAuth({
+          clientID: props.auth0ClientId,
+          domain: props.auth0Domain,
+          responseType: 'token id_token',
+          audience: props.auth0Audience,
+          redirectUri: props.authCallbackUrl,
+          scope: 'openid'
+        })),
+      shareReplay(1)
+    );
   }
 
   handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
+    this.auth0.forEach(a => a.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.store.store({
           accessToken: authResult.accessToken,
@@ -34,7 +41,7 @@ export class AuthService {
         this.router.navigate(['/']);
         console.log(err);
       }
-    });
+    }));
   }
 
   isAuthenticated(): boolean {
@@ -42,7 +49,7 @@ export class AuthService {
   }
 
   login(): void {
-    this.auth0.authorize();
+    this.auth0.forEach(a => a.authorize());
   }
 
   logout(): void {

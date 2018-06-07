@@ -2,6 +2,7 @@ import { DataSource } from '@angular/cdk/table';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
+import { ConfigService } from '../../core/config.service';
 import { StuffDataSource } from '../stuff-data-source';
 
 @Component({
@@ -17,11 +18,11 @@ export class StuffListComponent implements OnInit {
 
   columns = ['id', 'title', 'creationDate'];
 
-  constructor(private http: HttpClient) {
+  constructor(private config: ConfigService, private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.dataSource = new StuffDataSource(this.http, this.paginator, this.sort);
+    this.dataSource = new StuffDataSource(this.config, this.http, this.paginator, this.sort);
   }
 
 }
