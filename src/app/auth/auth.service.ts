@@ -4,7 +4,9 @@ import * as auth0 from 'auth0-js';
 import { environment } from '../../environments/environment';
 import { AuthStore } from './auth-store.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
   auth0 = new auth0.WebAuth({
