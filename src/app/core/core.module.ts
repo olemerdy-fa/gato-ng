@@ -8,12 +8,14 @@ import {
   MatListModule,
   MatPaginatorModule,
   MatSidenavModule,
+  MatSnackBarModule,
   MatSortModule,
   MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { CredentialsInterceptor } from './credentials-interceptor.service';
+import { HttpErrorInterceptor } from './http-error-interceptor.service';
 import { MainNavComponent } from './main-nav/main-nav.component';
 
 @NgModule({
@@ -28,6 +30,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSnackBarModule,
     RouterModule
   ],
   exports: [
@@ -45,6 +48,11 @@ export class CoreModule {
         {
           provide: HTTP_INTERCEPTORS,
           useClass: CredentialsInterceptor,
+          multi: true
+        },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: HttpErrorInterceptor,
           multi: true
         }
       ]
