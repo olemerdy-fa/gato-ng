@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/gato-ng",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
