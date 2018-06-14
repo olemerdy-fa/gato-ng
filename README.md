@@ -28,4 +28,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Deploy on Github Pages
 
-Run `ng build --prod --build-optimizer` and then `npx firebase deploy`
+Run `ng build --prod`, add `dist/gato-ng/config/environment.json` and then `npx firebase deploy`

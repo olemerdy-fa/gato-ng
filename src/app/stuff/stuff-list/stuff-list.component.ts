@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { ConfigService } from '../../core/config.service';
+import { Loadable } from '../../shared/loadable';
 import { StuffDataSource } from '../stuff-data-source';
 
 @Component({
@@ -14,7 +15,7 @@ export class StuffListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  dataSource: DataSource<any[]>;
+  dataSource: DataSource<any[]> & Loadable;
 
   columns = ['id', 'title', 'creationDate'];
 
