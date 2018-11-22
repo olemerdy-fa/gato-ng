@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://gato-api.herokuapp.com/",
+    "secure": true,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true
+  }
+}

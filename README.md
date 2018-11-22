@@ -6,6 +6,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+If your dev API server is running on localhost 8080 port, you can run `npm start -- --proxy-config src/proxy.localhost8080.conf.json`
+If you want to run on `https://gato-api.herokuapp.com` instance instead, you can run `npm start -- --proxy-config src/proxy.heroku.conf.json`
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

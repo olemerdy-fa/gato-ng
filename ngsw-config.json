@@ -12,15 +12,26 @@
           "/*.js"
         ]
       }
-    }, {
+    },
+    {
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**"
+          "/assets/**",
+          "/config/**"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/**"
         ]
       }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "from-api",
+      "urls": []
     }
   ]
 }

@@ -1,4 +1,3 @@
 {
-  "apiEndpoint": "https://gato-api.herokuapp.com/",
   "authCallbackUrl": "http://localhost:4200/auth/callback"
 }

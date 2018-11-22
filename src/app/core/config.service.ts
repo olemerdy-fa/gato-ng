@@ -13,7 +13,7 @@ export interface Config {
 }
 
 const baseConfig: Config = {
-  apiEndpoint: '',
+  apiEndpoint: '/api/',
   authCallbackUrl: '',
   auth0Audience: 'https://gato-api.herokuapp.com/',
   auth0ClientId: 'pzwuSOVtcMkwW6vom2uKiLmxxk6d1hdx',
